@@ -51,56 +51,29 @@
         <meta name="generator" content="Eleventy v3.0.0">
     
         <!-- Standard favicons -->
-        <link rel="icon" href="/assets/images/site/favicon.svg" type="image/svg+xml">
-        <link rel="icon" href="/assets/images/site/favicon-large-png.png" type="image/png">
-        <link rel="icon" href="/assets/images/site/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="https://www.johnpe.art/assets/images/site/favicon.svg" type="image/svg+xml">
+        <link rel="icon" href="https://www.johnpe.art/assets/images/site/favicon-large-png.png" type="image/png">
+        <link rel="icon" href="https://www.johnpe.art/assets/images/site/favicon.ico" type="image/x-icon">
         
         <!-- Apple iOS -->
-        <link rel="apple-touch-icon" href="/assets/images/site/favicon-large-png.png">
+        <link rel="apple-touch-icon" href="https://www.johnpe.art/assets/images/site/favicon-large-png.png">
         
         <!-- Safari pinned tab -->
-        <link rel="mask-icon" href="/assets/images/site/favicon-pinned-svg.svg" color="#5bbad5">
+        <link rel="mask-icon" href="https://www.johnpe.art/assets/images/site/favicon-pinned-svg.svg" color="#5bbad5">
     
         <!-- Safari toolbar colors -->
         <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
         <meta name="theme-color" content="#141619" media="(prefers-color-scheme: dark)">
     
         <!-- CSS -->
-        <link rel="stylesheet" href="/assets/styles/styles.css">
+        <link rel="stylesheet" href="https://www.johnpe.art/assets/styles/styles.css">
         
         <!-- Scripts -->
-        <script type="text/javascript" src="/assets/scripts/scroll-timeline.js"></script>
+        <script type="text/javascript" src="https://www.johnpe.art/assets/scripts/scroll-timeline.js"></script>
         
         <style>
-            
-            @keyframes rotateObject {
-                from {
-                    transform: rotate3d(0, 1, 0, 0deg);
-                }
-                to {
-                    transform: rotate3d(0, 1, 0, -360deg);
-                }
-            }
-            
-            @keyframes shimmer {
-                0% {
-                    filter: contrast(100%) brightness(100%) saturate(100%);
-                }
-                10% {
-                    filter: contrast(100%) brightness(100%);
-                }
-                50% {
-                    filter: contrast(120%) brightness(200%) saturate(120%);
-                }
-                90% {
-                    filter: contrast(100%) brightness(100%);
-                }
-                100% {
-                    filter: contrast(100%) brightness(100%) saturate(100%);
-                }
-            }
-            
-            a {
+        
+            a.gallery-link {
                 &:hover {
                     color: var(--color); 
                 }
@@ -112,7 +85,7 @@
                 --height:   65px;
                 --width:    57px;
                 --mult:     5;
-                --animation-duration: 15s;
+                --animation-duration: 2s;
                 
                 height: calc(var(--height) * var(--mult));
                 width: calc(var(--width) * var(--mult));
@@ -133,9 +106,7 @@
                 &.mult-lg {
                     --mult:     10;
                 }
-            }
-            
-            .object {
+                
                 * {
                     position: absolute;
                     display: block;
@@ -143,6 +114,16 @@
                     background-repeat: no-repeat;
                     backface-visibility: visible;
                     z-index: 100;
+                }
+                    
+                &:hover .gamepak {
+                    transform: rotate3d(0, 1, 0, 360deg);
+                    transition: transform var(--animation-duration);
+                }
+                    
+                &:hover .gamepak .group--front .group--label {
+                    transition: filter var(--animation-duration);
+                    filter: contrast(120%) brightness(130%) saturate(150%);
                 }
                 
                 .gamepak { 
@@ -154,11 +135,10 @@
                     aspect-ratio: 65/57;
                     
                     transform: rotate3d(0, 1, 0, 0deg);
+                    transition: transform var(--animation-duration);
                     transform-origin: center;
                     perspective: initial;
                     perspective-origin: top;
-                    
-                    animation: rotateObject var(--animation-duration) infinite ease-in-out;
                     
                     .face {
                         background: var(--gamepak-grey);
@@ -196,8 +176,9 @@
                     
                     top: calc(19px * var(--mult));
                     left: calc(7px * var(--mult));
-                            
-                    animation: shimmer var(--animation-duration) infinite alternate ease-in-out;
+                    
+                    filter: contrast(100%) brightness(100%) saturate(100%);
+                    transition: filter var(--animation-duration);
                 
                     .label-text {
                         --width: 43px;
@@ -537,9 +518,8 @@
                     <h1 class="page-title p-name">Games</h1>
                     <p class="lead">This is an experiment.</p>
                     <p>I have been experimenting with <a href="https://www.johnpe.art/2024/09/22/games-collection/">different ways to share my games collection</a> on my blog, inspired by the <em>Game Boy Game Pak</em> cartridges. I've tried drawing the <em>Game Paks</em> in 2D and in isometric profile. This page is me fiddling around with a CSS-only, 3D approach.</p>
-                    <blockquote>
-                        <p>This is not very performant or well-optimised. It also isn't designed to be responsive to different screen sizes, yet.</p>
-                    </blockquote>
+                    <p>Hover over the <em>Game Pak</em> to see the 3D effects.</p>
+                    <p>This is not very performant or well-optimised. It also isn't designed to be responsive to different screen sizes, yet.</p>
                 </div>
 
                 <ul class="gallery gallery-3 gallery-false">
@@ -553,7 +533,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="100%" data-right="06 Oct 2024"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/wario-land/label-art.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/wario-land/label-art.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -592,7 +572,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="100%" data-right="30 Dec 2024"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/super-mario-land-2-6-golden-coins/label-art.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/super-mario-land-2-6-golden-coins/label-art.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -631,7 +611,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="02 May 2025"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/lies-of-p.jpeg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/lies-of-p.jpeg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -670,7 +650,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="02 Mar 2025"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/star-wars-jedi-survivor.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/star-wars-jedi-survivor.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -709,7 +689,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="09 Jan 2025"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/carrion.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/carrion.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -748,7 +728,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="05 Jan 2025"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/plucky-squire.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/plucky-squire.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -787,7 +767,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="29 Dec 2024"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/bloodborne.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/bloodborne.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -826,7 +806,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="16 Nov 2024"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/ratchet-and-clank.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/ratchet-and-clank.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -865,7 +845,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="26 Sep 2024"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/marvels-spider-man-remastered.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/marvels-spider-man-remastered.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -904,7 +884,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="11 Aug 2024"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/elden-ring.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/elden-ring.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -943,7 +923,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="05 Oct 2023"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/cocoon.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/cocoon.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -982,7 +962,7 @@
                                             <div class="front face"></div>
                                             <div class="group--label">
                                                 <div class="label-text" data-left="Platinum" data-right="19 Aug 2023"></div>
-                                                <img class="box-art" src="/assets/images/posts/games/ratchet-and-clank-rift-apart.jpg">
+                                                <img class="box-art" src="https://www.johnpe.art/assets/images/posts/games/ratchet-and-clank-rift-apart.jpg">
                                             </div>
                                             <div class="front-top-depth-1 face"></div>
                                             <div class="front-top-depth-2 face"></div>
@@ -1011,7 +991,6 @@
                             </a>
                         </article>
                     </li>
-                    
                 
                 </ul>
             </section>
@@ -1023,7 +1002,7 @@
             
                 <div id="author--bio" class="h-card vcard p-author">
                     <a class="author--photo author--photo--link" rel="me" href="https://www.johnpe.art" title="Visit my website" tabindex="-1">
-                        <img class="u-photo hidden" alt="A Memoji avatar of John Peart" loading="lazy" src="/assets/images/me/memoji.png">
+                        <img class="u-photo hidden" alt="A Memoji avatar of John Peart" loading="lazy" src="https://www.johnpe.art/assets/images/me/memoji.png">
                     </a>
                     
                     <p class="p-name author--name"><a rel="author" class="link-secondary no-underline p-author u-uid" href="http://localhost:8080"><strong><span class="p-given-name">John</span> <span class="p-family-name">Peart</span></strong></a></p>
