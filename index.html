@@ -1,0 +1,1416 @@
+
+<html>
+    
+    <head>
+        
+        <title>CSS Game Pak</title>
+        <meta name="description" content="An experiment creating a Game Boy Game Pak using only CSS and HTML.">
+        <meta name="author" content="John Peart">
+        
+        <!-- RSS -->
+        <link rel="alternate" href="https://www.johnpe.art/feed/blogpost.xml" type="application/rss+xml" title="John Peart • Blogposts">
+        <link rel="alternate" href="https://www.johnpe.art/feed.xml" type="application/rss+xml" title="John Peart • All posts">
+        <link rel="alternate" href="https://www.johnpe.art/feed/game.xml" type="application/rss+xml" title="John Peart • Games">
+        <link rel="alternate" href="https://www.johnpe.art/feed/list.xml" type="application/rss+xml" title="John Peart • Lists">
+        <link rel="alternate" href="https://www.johnpe.art/feed/music.xml" type="application/rss+xml" title="John Peart • Music">
+        <link rel="alternate" href="https://www.johnpe.art/feed/note.xml" type="application/rss+xml" title="John Peart • Notes">
+        <link rel="alternate" href="https://www.johnpe.art/feed/photo.xml" type="application/rss+xml" title="John Peart • Photos">
+        <link rel="alternate" href="https://www.johnpe.art/feed/reply.xml" type="application/rss+xml" title="John Peart • Replies">
+        <link rel="alternate" href="https://www.johnpe.art/feed/share.xml" type="application/rss+xml" title="John Peart • Share">
+        <link rel="alternate" href="https://www.johnpe.art/feed/weeknotes.xml" type="application/rss+xml" title="John Peart • Weeknotes">
+        
+        <!-- Links to a document that describes a collection of records, documents, or other materials of historical interest. -->
+        <link rel="archives" href="https://www.johnpe.art/archives">
+        
+        <!-- Gives information about the author -->
+        <link rel="me" href="https://www.johnpe.art" type="text/html">
+        <link rel="me" href="https://linkedin.com/in/jrpeart" type="text/html">
+        <link rel="me" href="https://github.com/johnpeart" type="text/html">
+        <link rel="me" href="https://mastodon.social/@johnpeart" type="text/html">
+        <meta name="fediverse:creator" content="@johnpeart@mastodon.social">
+        <link rel="me" href="https://bsky.app/profile/johnpe.art" type="text/html">
+        <link href="https://gravatar.com/johnpeart" rel="me">
+    
+        <!-- Schema.org settings -->
+        <meta itemprop="name" content="CSS Game Pak">
+        <meta itemprop="description" content="An experiment creating a Game Boy Game Pak using only CSS and HTML.">
+        <meta itemprop="image" content="https://v1.screenshot.11ty.dev/https%3A%2F%2Fjohnpe.art%2Fsocial%2F/opengraph/_1749978796905">
+        
+        <!-- Facebook Open Graph settings -->
+        <meta property="og:url" content="https://www.johnpe.art/">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="CSS Game Pak">
+        <meta property="og:description" content="An experiment creating a Game Boy Game Pak using only CSS and HTML.">
+        <meta property="og:image" content="https://v1.screenshot.11ty.dev/https%3A%2F%2Fjohnpe.art%2Fgamepak/">
+        <meta property="og:site_name" content="John Peart">
+        <meta property="og:locale" content="en_GB">
+        <meta property="article:author" content="John Peart">
+        <meta property="article:publisher" content="John Peart">
+    
+        <!-- Build info -->
+        <meta name="generator" content="Eleventy v3.0.0">
+    
+        <!-- Standard favicons -->
+        <link rel="icon" href="/assets/images/site/favicon.svg" type="image/svg+xml">
+        <link rel="icon" href="/assets/images/site/favicon-large-png.png" type="image/png">
+        <link rel="icon" href="/assets/images/site/favicon.ico" type="image/x-icon">
+        
+        <!-- Apple iOS -->
+        <link rel="apple-touch-icon" href="/assets/images/site/favicon-large-png.png">
+        
+        <!-- Safari pinned tab -->
+        <link rel="mask-icon" href="/assets/images/site/favicon-pinned-svg.svg" color="#5bbad5">
+    
+        <!-- Safari toolbar colors -->
+        <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#141619" media="(prefers-color-scheme: dark)">
+    
+        <!-- CSS -->
+        <link rel="stylesheet" href="/assets/styles/styles.css">
+        
+        <!-- Scripts -->
+        <script type="text/javascript" src="/assets/scripts/scroll-timeline.js"></script>
+        
+        <style>
+            
+            @keyframes rotateObject {
+                from {
+                    transform: rotate3d(0, 1, 0, 0deg);
+                }
+                to {
+                    transform: rotate3d(0, 1, 0, -360deg);
+                }
+            }
+            
+            @keyframes shimmer {
+                0% {
+                    filter: contrast(100%) brightness(100%) saturate(100%);
+                }
+                10% {
+                    filter: contrast(100%) brightness(100%);
+                }
+                50% {
+                    filter: contrast(120%) brightness(200%) saturate(120%);
+                }
+                90% {
+                    filter: contrast(100%) brightness(100%);
+                }
+                100% {
+                    filter: contrast(100%) brightness(100%) saturate(100%);
+                }
+            }
+            
+            a {
+                &:hover {
+                    color: var(--color); 
+                }
+            }
+            
+            .object {
+                display: inline-block;
+                
+                --height:   65px;
+                --width:    57px;
+                --mult:     5;
+                --animation-duration: 15s;
+                
+                height: calc(var(--height) * var(--mult));
+                width: calc(var(--width) * var(--mult));
+                
+                transform-style: preserve-3d;
+                justify-self: center;
+                
+                margin: var(--pad);
+                
+                &.mult-sm {
+                    --mult:     2;
+                }
+                
+                &.mult-md {
+                    --mult:     5;
+                }
+                
+                &.mult-lg {
+                    --mult:     10;
+                }
+            }
+            
+            .object {
+                * {
+                    position: absolute;
+                    display: block;
+                    transform-style: preserve-3d;
+                    background-repeat: no-repeat;
+                    backface-visibility: visible;
+                    z-index: 100;
+                }
+                
+                .gamepak { 
+                    --height:   65px;
+                    --width:    57px;
+                                       
+                    height: calc(var(--height) * var(--mult));
+                    width: calc(var(--width) * var(--mult));
+                    aspect-ratio: 65/57;
+                    
+                    transform: rotate3d(0, 1, 0, 0deg);
+                    transform-origin: center;
+                    perspective: initial;
+                    perspective-origin: top;
+                    
+                    animation: rotateObject var(--animation-duration) infinite ease-in-out;
+                    
+                    .face {
+                        background: var(--gamepak-grey);
+                        box-shadow: inset 0px 0px calc(3px * var(--mult)) rgba(0,0,0,0.2);
+                    }
+                }
+                
+            }
+            
+            .object .gamepak {
+                
+                --gamepak-grey: grey;
+            
+                .front {
+                    --height:   65px;
+                    --width:    57px;
+                    
+                    height: calc(var(--height) * var(--mult));
+                    width: calc(var(--width) * var(--mult));
+                    
+                    aspect-ratio: 0.877;
+                    
+                    z-index: 2;
+                    transform-origin: top left;
+                    
+                    clip-path: shape(from 10.53% 85.43%,line to 10.53% 31.49%,curve to 14.86% 27.69% with 10.53% 29.39%/12.47% 27.69%,line to 85.14% 27.69%,curve to 89.47% 31.49% with 87.53% 27.69%/89.47% 29.39%,line to 89.47% 85.43%,curve to 85.14% 89.23% with 89.47% 87.53%/87.53% 89.23%,line to 14.86% 89.23%,curve to 10.53% 85.43% with 12.47% 89.23%/10.53% 87.53%,close,move to 57.68% 90.77%,line to 50% 98.46%,line to 42.32% 90.77%,close,move to 10.53% 15.38%,line to 10.53% 15.38%,curve to 21.05% 6.15% with 10.53% 10.29%/15.24% 6.15%,line to 78.95% 6.15%,curve to 89.47% 15.38% with 84.76% 6.15%/89.47% 10.29%,curve to 78.95% 24.62% with 89.47% 20.48%/84.76% 24.62%,line to 21.05% 24.62%,curve to 10.53% 15.38% with 15.24% 24.62%/10.53% 20.48%,close,move to 0% 21.54%,line to 11.45% 21.54%,curve to 13.48% 23.08% with 12.05% 22.12%/12.73% 22.64%,line to 0% 23.08%,line to 0% 41.54%,line to 3.51% 41.54%,line to 3.51% 100%,line to 96.49% 100%,line to 96.49% 41.54%,line to 100% 41.54%,line to 100% 23.08%,line to 86.52% 23.08%,curve to 88.55% 21.54% with 87.27% 22.64%/87.95% 22.12%,line to 100% 21.54%,line to 100% 20%,line to 89.82% 20%,curve to 90.46% 18.85% with 90.06% 19.63%/90.28% 19.25%,line to 100% 18.85%,line to 100% 17.31%,line to 91% 17.31%,curve to 91.19% 16.15% with 91.09% 16.93%/91.16% 16.55%,line to 100% 16.15%,line to 100% 14.62%,line to 91.19% 14.62%,curve to 91% 13.46% with 91.16% 14.22%/91.09% 13.84%,line to 100% 13.46%,line to 100% 11.92%,line to 90.46% 11.92%,curve to 89.82% 10.77% with 90.28% 11.52%/90.06% 11.14%,line to 100% 10.77%,line to 100% 9.23%,line to 88.55% 9.23%,curve to 86.52% 7.69% with 87.95% 8.65%/87.27% 8.13%,line to 100% 7.69%,line to 100% 4.62%,line to 91.23% 4.62%,line to 91.23% 0%,line to 0% 0%,line to 0% 7.69%,line to 13.48% 7.69%,curve to 11.45% 9.23% with 12.73% 8.13%/12.05% 8.65%,line to 0% 9.23%,line to 0% 10.77%,line to 10.18% 10.77%,curve to 9.54% 11.92% with 9.94% 11.14%/9.72% 11.52%,line to 0% 11.92%,line to 0% 13.46%,line to 9% 13.46%,curve to 8.81% 14.62% with 8.91% 13.84%/8.84% 14.22%,line to 0% 14.62%,line to 0% 16.15%,line to 8.81% 16.15%,curve to 9% 17.31% with 8.84% 16.55%/8.91% 16.93%,line to 0% 17.31%,line to 0% 18.85%,line to 9.54% 18.85%,curve to 10.18% 20% with 9.72% 19.25%/9.94% 19.63%,line to 0% 20%,close);
+                }
+                
+                .group--label {
+                    --width: 43px;
+                    --height: 38px;
+                    
+                    height: calc(var(--height) * var(--mult));
+                    width: calc(var(--width) * var(--mult));
+                    
+                    top: calc(19px * var(--mult));
+                    left: calc(7px * var(--mult));
+                            
+                    animation: shimmer var(--animation-duration) infinite alternate ease-in-out;
+                
+                    .label-text {
+                        --width: 43px;
+                        --height: 38px;
+                        
+                        height: calc(var(--height) * var(--mult));
+                        width: calc(var(--width) * var(--mult));
+                        
+                        z-index: 50;
+                        
+                        background: var(--background);
+                        
+                        transform-origin: top left;
+                        transform: translateZ(calc(-0.5px * var(--mult)));
+                        
+                        aspect-ratio: 1.132;
+                        clip-path: shape(from 9.3% 100%,line to 9.3% 0%,line to 4.1% 0%,curve to 0% 4.64% with 1.84% 0%/0% 2.08%,line to 0% 95.36%,curve to 4.1% 100% with 0% 97.92%/1.84% 100%,close,move to 90.7% 100%,line to 95.9% 100%,curve to 100% 95.36% with 98.16% 100%/100% 97.92%,line to 100% 4.64%,curve to 95.9% 0% with 100% 2.08%/98.16% 0%,line to 90.7% 0%,close);
+                        
+                        &::before,
+                        &::after {
+                            display: block;
+                            position: absolute;
+                            
+                            --width: 38px;
+                            --height: 4px;
+                            
+                            height: calc(var(--height) * var(--mult));
+                            width: calc(var(--width) * var(--mult));
+                            
+                            z-index: 60;
+                            transform-origin: top left;
+                            
+                            font-size: calc(2.5px * var(--mult));
+                            line-height: calc(var(--height) * var(--mult));
+                            text-align: center;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            
+                            background: linear-gradient(45deg, rgba(50 0 255/10%), CornflowerBlue), url("data:image/svg+xml;utf8,%3Csvg%20viewBox%3D'0%200%20100%20100'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%0A%20%20%3Cfilter%20id%3D'noiseFilter'%3E%0A%20%20%20%20%3CfeTurbulence%20%0A%20%20%20%20%20%20type%3D'fractalNoise'%20%0A%20%20%20%20%20%20baseFrequency%3D'2.0'%20%0A%20%20%20%20%20%20numOctaves%3D'6'%20%0A%20%20%20%20%20%20stitchTiles%3D'stitch'%2F%3E%0A%20%20%3C%2Ffilter%3E%0A%20%20%0A%20%20%3Crect%20width%3D'100%25'%20height%3D'100%25'%20filter%3D'url(%23noiseFilter)'%2F%3E%0A%3C%2Fsvg%3E");
+
+                            background-size: cover;
+                        }
+                        &::before {
+                            content: attr(data-left);
+                            
+                            top: calc(var(--width) * var(--mult));
+                            left: calc(0px * var(--mult));
+                            
+                            transform: rotate(-90deg);
+                        }
+                        &::after {
+                            content: attr(data-right);
+                            
+                            top: calc(0px * var(--mult));
+                            left: calc(43px * var(--mult));
+                            
+                            transform: rotate(90deg);
+                        }
+                    }
+                    
+                    .box-art {                    
+                        --width: 43px;
+                        --height: 38px;
+                        
+                        height: calc(var(--height) * var(--mult));
+                        width: calc(var(--width) * var(--mult));
+                        
+                        z-index: 40;
+                        
+                        border-radius: calc(2px * var(--mult));
+                        
+                        box-shadow: 
+                            inset 2px 2px 5px rgba(255,255,255,0.2),
+                            inset -2px -2px 5px rgba(0,0,0,0.2),
+                                0 0 2px rgba(0,0,0,0.3);
+                        transform-origin: top left;
+                        transform: translateZ(calc(-0.5px * var(--mult)));
+                        
+                        overflow: hidden;
+                        
+                        object-fit: contain;
+                        object-position: center;
+                    }
+                }
+                
+                .front-top-depth-1 {
+                    --width: 45px;
+                    --height: 12px;
+                    
+                    height: calc(var(--height) * var(--mult));
+                    width: calc(var(--width) * var(--mult));
+                    
+                    top: calc(4px * var(--mult));
+                    left: calc(6px * var(--mult));
+                    
+                    border-radius: 100px;
+                    
+                    background: var(--gamepak-grey);
+                    box-shadow: 
+                        inset 2px 2px 5px rgba(255,255,255,0.2),
+                        inset -2px -2px 5px rgba(0,0,0,0.2),
+                            0 0 2px rgba(0,0,0,0.3);
+                    transform-origin: top left;
+                    transform: translateZ(calc(-0.5px * var(--mult)));
+                }
+                
+                .front-top-depth-2 {
+                    --width: 46px;
+                    --height: 14px;
+                    
+                    height: calc(var(--height) * var(--mult));
+                    width: calc(var(--width) * var(--mult));
+                    
+                    top: calc(3px * var(--mult));
+                    left: calc(5.5px * var(--mult));
+                    
+                    border-radius: 100px;
+                    
+                    background: var(--gamepak-grey);
+                    filter: brightness(0.8);
+                    transform-origin: top left;
+                    transform: translateZ(calc(-1px * var(--mult)));
+                }
+                
+                .front-depth-1 {
+                    --height: 65px;
+                    --width: 55px;
+                    
+                    height: calc(var(--height) * var(--mult));
+                    width: calc(var(--width) * var(--mult));
+                    
+                    left: calc(1px * var(--mult));
+                    
+                    z-index: 1;
+                    transform-origin: top left;
+                    transform: translateZ(calc(-1px * var(--mult)));
+                    
+                    filter: brightness(0.85);
+                    
+                    aspect-ratio: 0.877;
+                    clip-path: shape(from 0% 0%,line to 91.23% 0%,line to 91.23% 4.62%,line to 100% 4.62%,line to 100% 41.54%,line to 96.49% 41.54%,line to 96.49% 100%,line to 3.51% 100%,line to 3.51% 41.54%,line to 0% 41.54%,close);
+                }
+                
+                .front-depth-2,
+                .front-depth-3 {
+                    --height: 65px;
+                    --width: 57px;
+                    
+                    height: calc(var(--height) * var(--mult));
+                    width: calc(var(--width) * var(--mult));
+                    
+                    z-index: 1;
+                    transform-origin: top left;
+                            
+                    filter: brightness(0.85);
+                    
+                    aspect-ratio: 0.877;
+                    clip-path: shape(from 0% 0%,line to 91.23% 0%,line to 91.23% 4.62%,line to 100% 4.62%,line to 100% 41.54%,line to 96.49% 41.54%,line to 96.49% 100%,line to 3.51% 100%,line to 3.51% 41.54%,line to 0% 41.54%,close);
+                }
+                
+                .front-depth-2 {
+                    transform: translateZ(calc(-2px * var(--mult)));
+                }
+                
+                .front-depth-3 {
+                    transform: translateZ(calc(-7px * var(--mult)));
+                }
+                
+                .back {
+                    --height: 65px;
+                    --width: 57px;
+                    
+                    height: calc(var(--height) * var(--mult));
+                    width: calc(var(--width) * var(--mult));
+                    
+                    transform-origin: bottom center;
+                    transform: rotateX(-180deg) translateZ(calc(8px * var(--mult)));
+                    
+                    top: calc(var(--height) * var(--mult) * -1);
+                    
+                    aspect-ratio: 0.877;
+                    clip-path: shape(from 0% 0%,line to 100% 0%,line to 100% 95.38%,line to 91.23% 95.38%,line to 91.23% 100%,line to 0% 100%,close);
+                }
+                
+                .group--front-left {
+                    transform: rotateY(-90deg) translateX(calc(-8px * var(--mult)));
+                    transform-origin: top right;
+                    
+                    .front-left {        
+                        --height: 65px;
+                        --width: 8px;
+                    
+                        height: calc(var(--height) * var(--mult));
+                        width: calc(var(--width) * var(--mult));
+                        
+                        aspect-ratio: 0.123;
+                        clip-path: shape(from 50% 18.85%,line to 50% 20%,line to 0% 20%,line to 0% 18.85%,close,move to 50% 21.54%,line to 50% 23.08%,line to 0% 23.08%,line to 0% 21.54%,close,move to 100% 10.77%,line to 100% 9.23%,line to 75% 9.23%,line to 75% 7.69%,line to 100% 7.69%,line to 100% 0%,line to 0% 0%,line to 0% 7.69%,line to 50% 7.69%,line to 50% 9.23%,line to 0% 9.23%,line to 0% 10.77%,line to 50% 10.77%,line to 50% 11.92%,line to 0% 11.92%,line to 0% 13.46%,line to 50% 13.46%,line to 50% 14.62%,line to 0% 14.62%,line to 0% 16.15%,line to 50% 16.15%,line to 50% 17.31%,line to 0% 17.31%,line to 0% 18.85%,line to 0% 100%,line to 75% 100%,line to 75% 41.54%,line to 100% 41.54%,line to 100% 23.08%,line to 75% 23.08%,line to 75% 21.54%,line to 100% 21.54%,line to 100% 20%,line to 75% 20%,line to 75% 18.85%,line to 100% 18.85%,line to 100% 17.31%,line to 75% 17.31%,line to 75% 16.15%,line to 100% 16.15%,line to 100% 14.62%,line to 75% 14.62%,line to 75% 13.46%,line to 100% 13.46%,line to 100% 11.92%,line to 75% 11.92%,line to 75% 10.77%,close);
+                    }
+                    
+                    .front-left-depth-1 {    
+                        height: calc(var(--height) * var(--mult));
+                        width: calc(7px * var(--mult));
+                        
+                        transform: translateZ(calc(-1px * var(--mult)));
+                        filter: brightness(0.85);
+                    }
+                
+                    .front-left-slope {
+                        height: calc(38px * var(--mult));
+                        width: calc(sqrt(8) * 1px * var(--mult));
+            
+                        top: calc(27px * var(--mult));
+                        left: calc(6px * var(--mult));
+            
+                        transform-origin: top left;
+                        transform: rotateY(45deg);
+                    }
+                }
+                
+                .group--front-right {
+                    left: calc(57px * var(--mult));
+                    
+                    transform: rotateY(90deg);
+                    transform-origin: top left;
+                
+                    .front-right {
+                        height: calc(62px * var(--mult));
+                        width: calc(8px * var(--mult));
+                        
+                        top: calc(3px * var(--mult));
+                        
+                        aspect-ratio: 0.129;
+                        clip-path: shape(from 0% 14.92%,line to 25% 14.92%,line to 25% 16.13%,line to 0% 16.13%,line to 0% 17.74%,line to 25% 17.74%,line to 25% 19.35%,line to 0% 19.35%,line to 0% 38.71%,line to 25% 38.71%,line to 25% 100%,line to 100% 100%,line to 100% 19.35%,line to 50% 19.35%,line to 50% 17.74%,line to 100% 17.74%,line to 100% 16.13%,line to 50% 16.13%,line to 50% 14.92%,line to 100% 14.92%,line to 100% 13.31%,line to 50% 13.31%,line to 50% 12.1%,line to 100% 12.1%,line to 100% 10.48%,line to 50% 10.48%,line to 50% 9.27%,line to 100% 9.27%,line to 100% 7.66%,line to 50% 7.66%,line to 50% 6.45%,line to 100% 6.45%,line to 100% 4.84%,line to 50% 4.84%,line to 50% 3.23%,line to 100% 3.23%,line to 100% 0%,line to 0% 0%,line to 0% 3.23%,line to 25% 3.23%,line to 25% 4.84%,line to 0% 4.84%,line to 0% 6.45%,line to 25% 6.45%,line to 25% 7.66%,line to 0% 7.66%,line to 0% 9.27%,line to 25% 9.27%,line to 25% 10.48%,line to 0% 10.48%,line to 0% 12.1%,line to 25% 12.1%,line to 25% 13.31%,line to 0% 13.31%,close);
+                    }
+                    
+                    .front-right-depth-1 {    
+                        height: calc(62px * var(--mult));
+                        width: calc(7px * var(--mult));
+                        
+                        left: calc(1px * var(--mult));
+                        top: calc(3px * var(--mult));
+                        
+                        transform: translateZ(calc(-1px * var(--mult)));
+                        filter: brightness(0.8);
+                    }
+                    
+                    .front-right-slope {
+                        height: calc(38px * var(--mult));
+                        width: calc(sqrt(8) * 1px * var(--mult));
+                        transform-origin: top left;
+                        transform: rotateY(135deg);
+                        top: calc(27px * var(--mult));
+                        left: calc(2px * var(--mult));
+                    }
+                }
+                
+                .group--top {
+                    transform: rotateX(90deg);
+                    
+                    .top {
+                        height: calc(8px * var(--mult));
+                        width: calc(52px * var(--mult));
+                        
+                        top: calc(-8px * var(--mult));
+                        
+                        transform-origin: top center;
+                    }
+                    
+                    .top-side {
+                        height: calc(8px * var(--mult));
+                        width: calc(3px * var(--mult));
+                        
+                        top: calc(-8px * var(--mult));
+                        left: calc(52px * var(--mult));
+                        
+                        transform-origin: top left;
+                        transform: rotateY(90deg);
+                    }
+                    
+                    .top-top {
+                        height: calc(8px * var(--mult));
+                        width: calc(5px * var(--mult));
+                        
+                        top: calc(-8px * var(--mult));
+                        left: calc(52px * var(--mult));
+                        
+                        transform-origin: top center;
+                        transform: translateZ(calc(-3px * var(--mult)));
+                    }
+                }
+                
+            }
+        </style>
+        
+    </head>
+
+    <body>
+        
+        <header class="global-navigation">
+    
+            <nav class="navigation glass" aria-label="Main menu">
+                
+                <h1 class="navigation--wordmark">
+                    <a href="http://localhost:8080" class="navigation--wordmark--link">John Peart</a>
+                </h1>
+            
+                <ul class="navigation--links">
+                    
+                    <li class="navigation--links-item">
+                        <a href="/search" class="navigation--link navigation--icon button">
+            <!--?xml version="1.0" encoding="UTF-8" standalone="no"?--><svg width="28" height="28" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><path d="M0,8.306c0,-1.144 0.215,-2.219 0.646,-3.223c0.431,-1.005 1.027,-1.889 1.788,-2.651c0.761,-0.763 1.644,-1.359 2.649,-1.788c1.004,-0.429 2.08,-0.644 3.228,-0.644c1.147,-0 2.222,0.215 3.225,0.644c1.003,0.429 1.886,1.025 2.649,1.788c0.763,0.762 1.36,1.646 1.79,2.651c0.431,1.004 0.646,2.079 0.646,3.223c0,0.805 -0.112,1.576 -0.337,2.313c-0.226,0.737 -0.539,1.416 -0.94,2.037l3.916,3.936c0.194,0.194 0.338,0.412 0.432,0.653c0.093,0.242 0.14,0.494 0.14,0.757c0,0.375 -0.085,0.714 -0.256,1.016c-0.171,0.303 -0.406,0.542 -0.705,0.718c-0.3,0.176 -0.64,0.264 -1.021,0.264c-0.267,-0 -0.525,-0.047 -0.775,-0.141c-0.25,-0.093 -0.472,-0.235 -0.666,-0.426l-3.96,-3.966c-0.602,0.362 -1.252,0.644 -1.951,0.846c-0.699,0.202 -1.428,0.304 -2.187,0.304c-1.148,-0 -2.224,-0.215 -3.228,-0.644c-1.005,-0.429 -1.888,-1.025 -2.649,-1.788c-0.761,-0.763 -1.357,-1.647 -1.788,-2.651c-0.431,-1.005 -0.646,-2.081 -0.646,-3.228Zm2.698,-0c-0,0.776 0.145,1.502 0.434,2.18c0.289,0.677 0.692,1.273 1.208,1.788c0.517,0.514 1.113,0.917 1.791,1.208c0.677,0.291 1.402,0.437 2.175,0.437c0.776,-0 1.502,-0.146 2.18,-0.437c0.677,-0.291 1.273,-0.694 1.788,-1.208c0.514,-0.515 0.917,-1.111 1.208,-1.788c0.291,-0.678 0.437,-1.404 0.437,-2.18c-0,-0.773 -0.146,-1.498 -0.437,-2.175c-0.291,-0.678 -0.694,-1.274 -1.208,-1.791c-0.515,-0.516 -1.111,-0.919 -1.788,-1.208c-0.678,-0.289 -1.404,-0.434 -2.18,-0.434c-0.773,-0 -1.498,0.145 -2.175,0.434c-0.678,0.289 -1.274,0.692 -1.791,1.208c-0.516,0.517 -0.919,1.113 -1.208,1.791c-0.289,0.677 -0.434,1.402 -0.434,2.175Z" fill="currentColor"></path></svg>
+            <span class="sr-only">Search</span>
+        </a>
+                    </li>
+                    
+                    
+                    <li class="navigation--links-item">
+                        <a href="/menu" class="navigation--link navigation--icon button">
+            <!--?xml version="1.0" encoding="UTF-8" standalone="no"?--><svg width="28" height="28" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><path d="M1.764,5.783c-0.557,-0 -0.991,-0.157 -1.3,-0.469c-0.309,-0.313 -0.464,-0.759 -0.464,-1.336l-0,-2.173c-0,-0.571 0.155,-1.015 0.464,-1.331c0.309,-0.316 0.743,-0.474 1.3,-0.474l2.254,0c0.558,0 0.991,0.158 1.301,0.474c0.309,0.316 0.464,0.76 0.464,1.331l-0,2.173c-0,0.577 -0.155,1.023 -0.464,1.336c-0.31,0.312 -0.743,0.469 -1.301,0.469l-2.254,-0Zm0.194,-1.397l1.867,-0c0.176,-0 0.314,-0.048 0.413,-0.143c0.098,-0.095 0.148,-0.242 0.148,-0.439l-0,-1.825c-0,-0.191 -0.05,-0.334 -0.148,-0.429c-0.099,-0.095 -0.237,-0.143 -0.413,-0.143l-1.867,0c-0.183,0 -0.321,0.048 -0.413,0.143c-0.092,0.095 -0.138,0.238 -0.138,0.429l0,1.825c0,0.197 0.046,0.344 0.138,0.439c0.092,0.095 0.23,0.143 0.413,0.143Zm6.905,1.397c-0.558,-0 -0.989,-0.157 -1.295,-0.469c-0.306,-0.313 -0.459,-0.759 -0.459,-1.336l-0,-2.173c-0,-0.571 0.153,-1.015 0.459,-1.331c0.306,-0.316 0.737,-0.474 1.295,-0.474l2.264,0c0.558,0 0.989,0.158 1.295,0.474c0.306,0.316 0.459,0.76 0.459,1.331l0,2.173c0,0.577 -0.153,1.023 -0.459,1.336c-0.306,0.312 -0.737,0.469 -1.295,0.469l-2.264,-0Zm0.194,-1.397l1.876,-0c0.177,-0 0.313,-0.048 0.408,-0.143c0.095,-0.095 0.143,-0.242 0.143,-0.439l-0,-1.825c-0,-0.191 -0.048,-0.334 -0.143,-0.429c-0.095,-0.095 -0.231,-0.143 -0.408,-0.143l-1.876,0c-0.184,0 -0.322,0.048 -0.413,0.143c-0.092,0.095 -0.138,0.238 -0.138,0.429l-0,1.825c-0,0.197 0.046,0.344 0.138,0.439c0.091,0.095 0.229,0.143 0.413,0.143Zm6.925,1.397c-0.558,-0 -0.991,-0.157 -1.301,-0.469c-0.309,-0.313 -0.464,-0.759 -0.464,-1.336l0,-2.173c0,-0.571 0.155,-1.015 0.464,-1.331c0.31,-0.316 0.743,-0.474 1.301,-0.474l2.254,0c0.557,0 0.991,0.158 1.3,0.474c0.309,0.316 0.464,0.76 0.464,1.331l0,2.173c0,0.577 -0.155,1.023 -0.464,1.336c-0.309,0.312 -0.743,0.469 -1.3,0.469l-2.254,-0Zm0.193,-1.397l1.867,-0c0.177,-0 0.313,-0.048 0.408,-0.143c0.095,-0.095 0.143,-0.242 0.143,-0.439l-0,-1.825c-0,-0.191 -0.048,-0.334 -0.143,-0.429c-0.095,-0.095 -0.231,-0.143 -0.408,-0.143l-1.867,0c-0.183,0 -0.323,0.048 -0.418,0.143c-0.095,0.095 -0.143,0.238 -0.143,0.429l0,1.825c0,0.197 0.048,0.344 0.143,0.439c0.095,0.095 0.235,0.143 0.418,0.143Zm-14.411,8.301c-0.557,0 -0.991,-0.156 -1.3,-0.469c-0.309,-0.313 -0.464,-0.754 -0.464,-1.326l-0,-2.182c-0,-0.578 0.155,-1.023 0.464,-1.336c0.309,-0.313 0.743,-0.469 1.3,-0.469l2.254,-0c0.558,-0 0.991,0.156 1.301,0.469c0.309,0.313 0.464,0.758 0.464,1.336l-0,2.182c-0,0.572 -0.155,1.013 -0.464,1.326c-0.31,0.313 -0.743,0.469 -1.301,0.469l-2.254,0Zm0.194,-1.397l1.867,0c0.176,0 0.314,-0.049 0.413,-0.148c0.098,-0.098 0.148,-0.243 0.148,-0.433l-0,-1.836c-0,-0.184 -0.05,-0.325 -0.148,-0.423c-0.099,-0.099 -0.237,-0.148 -0.413,-0.148l-1.867,-0c-0.183,-0 -0.321,0.049 -0.413,0.148c-0.092,0.098 -0.138,0.239 -0.138,0.423l0,1.836c0,0.19 0.046,0.335 0.138,0.433c0.092,0.099 0.23,0.148 0.413,0.148Zm14.024,1.397c-0.558,0 -0.991,-0.156 -1.301,-0.469c-0.309,-0.313 -0.464,-0.754 -0.464,-1.326l0,-2.182c0,-0.578 0.155,-1.023 0.464,-1.336c0.31,-0.313 0.743,-0.469 1.301,-0.469l2.254,-0c0.557,-0 0.991,0.156 1.3,0.469c0.309,0.313 0.464,0.758 0.464,1.336l0,2.182c0,0.572 -0.155,1.013 -0.464,1.326c-0.309,0.313 -0.743,0.469 -1.3,0.469l-2.254,0Zm0.193,-1.397l1.867,0c0.177,0 0.313,-0.049 0.408,-0.148c0.095,-0.098 0.143,-0.243 0.143,-0.433l-0,-1.836c-0,-0.184 -0.048,-0.325 -0.143,-0.423c-0.095,-0.099 -0.231,-0.148 -0.408,-0.148l-1.867,-0c-0.183,-0 -0.323,0.049 -0.418,0.148c-0.095,0.098 -0.143,0.239 -0.143,0.423l0,1.836c0,0.19 0.048,0.335 0.143,0.433c0.095,0.099 0.235,0.148 0.418,0.148Zm-14.411,8.302c-0.557,0 -0.991,-0.156 -1.3,-0.469c-0.309,-0.313 -0.464,-0.758 -0.464,-1.336l-0,-2.173c-0,-0.577 0.155,-1.023 0.464,-1.336c0.309,-0.312 0.743,-0.469 1.3,-0.469l2.254,0c0.558,0 0.991,0.157 1.301,0.469c0.309,0.313 0.464,0.759 0.464,1.336l-0,2.173c-0,0.578 -0.155,1.023 -0.464,1.336c-0.31,0.313 -0.743,0.469 -1.301,0.469l-2.254,0Zm0.194,-1.407l1.867,-0c0.176,-0 0.314,-0.048 0.413,-0.143c0.098,-0.095 0.148,-0.238 0.148,-0.429l-0,-1.825c-0,-0.197 -0.05,-0.343 -0.148,-0.439c-0.099,-0.095 -0.237,-0.142 -0.413,-0.142l-1.867,-0c-0.183,-0 -0.321,0.047 -0.413,0.142c-0.092,0.096 -0.138,0.242 -0.138,0.439l0,1.825c0,0.191 0.046,0.334 0.138,0.429c0.092,0.095 0.23,0.143 0.413,0.143Zm6.905,1.407c-0.558,0 -0.989,-0.156 -1.295,-0.469c-0.306,-0.313 -0.459,-0.758 -0.459,-1.336l-0,-2.173c-0,-0.577 0.153,-1.023 0.459,-1.336c0.306,-0.312 0.737,-0.469 1.295,-0.469l2.264,0c0.558,0 0.989,0.157 1.295,0.469c0.306,0.313 0.459,0.759 0.459,1.336l0,2.173c0,0.578 -0.153,1.023 -0.459,1.336c-0.306,0.313 -0.737,0.469 -1.295,0.469l-2.264,0Zm0.194,-1.407l1.876,-0c0.177,-0 0.313,-0.048 0.408,-0.143c0.095,-0.095 0.143,-0.238 0.143,-0.429l-0,-1.825c-0,-0.197 -0.048,-0.343 -0.143,-0.439c-0.095,-0.095 -0.231,-0.142 -0.408,-0.142l-1.876,-0c-0.184,-0 -0.322,0.047 -0.413,0.142c-0.092,0.096 -0.138,0.242 -0.138,0.439l-0,1.825c-0,0.191 0.046,0.334 0.138,0.429c0.091,0.095 0.229,0.143 0.413,0.143Zm6.925,1.407c-0.558,0 -0.991,-0.156 -1.301,-0.469c-0.309,-0.313 -0.464,-0.758 -0.464,-1.336l0,-2.173c0,-0.577 0.155,-1.023 0.464,-1.336c0.31,-0.312 0.743,-0.469 1.301,-0.469l2.254,0c0.557,0 0.991,0.157 1.3,0.469c0.309,0.313 0.464,0.759 0.464,1.336l0,2.173c0,0.578 -0.155,1.023 -0.464,1.336c-0.309,0.313 -0.743,0.469 -1.3,0.469l-2.254,0Zm0.193,-1.407l1.867,-0c0.177,-0 0.313,-0.048 0.408,-0.143c0.095,-0.095 0.143,-0.238 0.143,-0.429l-0,-1.825c-0,-0.197 -0.048,-0.343 -0.143,-0.439c-0.095,-0.095 -0.231,-0.142 -0.408,-0.142l-1.867,-0c-0.183,-0 -0.323,0.047 -0.418,0.142c-0.095,0.096 -0.143,0.242 -0.143,0.439l0,1.825c0,0.191 0.048,0.334 0.143,0.429c0.095,0.095 0.235,0.143 0.418,0.143Zm-7.312,-5.498c-0.558,0 -0.989,-0.156 -1.295,-0.469c-0.306,-0.313 -0.459,-0.754 -0.459,-1.326l-0,-2.182c-0,-0.578 0.153,-1.023 0.459,-1.336c0.306,-0.313 0.737,-0.469 1.295,-0.469l2.264,-0c0.558,-0 0.989,0.156 1.295,0.469c0.306,0.313 0.459,0.758 0.459,1.336l0,2.182c0,0.572 -0.153,1.013 -0.459,1.326c-0.306,0.313 -0.737,0.469 -1.295,0.469l-2.264,0Zm0.194,-1.397l1.876,0c0.177,0 0.313,-0.049 0.408,-0.148c0.095,-0.098 0.143,-0.243 0.143,-0.433l-0,-1.836c-0,-0.184 -0.048,-0.325 -0.143,-0.423c-0.095,-0.099 -0.231,-0.148 -0.408,-0.148l-1.876,-0c-0.184,-0 -0.322,0.049 -0.413,0.148c-0.092,0.098 -0.138,0.239 -0.138,0.423l-0,1.836c-0,0.19 0.046,0.335 0.138,0.433c0.091,0.099 0.229,0.148 0.413,0.148Z" fill="currentColor"></path></svg>
+            <span class="sr-only">Menu</span>
+        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                </ul>
+                
+            </nav>
+                
+        </header>
+        
+        <main class="content">
+            <section id="page-content" class="h-entry e-content">
+
+                <div class="container">
+                    <h1 class="page-title p-name">Games</h1>
+                </div>
+
+                <ul class="gallery gallery-3 gallery-false">
+
+                    
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1746224580/" title="Read Lies of P" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="02 May 2025"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/lies-of-p.jpeg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1743933600/" title="Read Mini Motorways" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Played" data-right="06 Apr 2025"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/mini-motorways.jpeg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1740957960/" title="Read STAR WARS Jedi: Survivor" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="02 Mar 2025"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/star-wars-jedi-survivor.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1738365300/" title="Read Suicide Squad: Kill the Justice League" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="31 Jan 2025"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/suicide-squad-kill-the-justice-league.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1736463300/" title="Read Carrion" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="09 Jan 2025"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/carrion.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1736111460/" title="Read The Plucky Squire" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="05 Jan 2025"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/plucky-squire.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1735552800/" title="Read Super Mario Land 2: 6 Golden Coins" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="100%" data-right="30 Dec 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/super-mario-land-2-6-golden-coins/label-art.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1735476840/" title="Read Bloodborne" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="29 Dec 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/bloodborne.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1731763320/" title="Read Ratchet & Clank" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="16 Nov 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/ratchet-and-clank.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1731127560/" title="Read Control" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="09 Nov 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/control.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1730410560/" title="Read Marvel’s Spider-Man: Miles Morales" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="31 Oct 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/marvels-spider-man-miles-morales.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1728207180/" title="Read Super Mario Land 3: Wario Land" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="100%" data-right="06 Oct 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/wario-land/label-art.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1727343180/" title="Read Marvel’s Spider-Man Remastered" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="26 Sep 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/marvels-spider-man-remastered.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1725823500/" title="Read inFAMOUS First Light" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="08 Sep 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/infamous-first-light.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1725741300/" title="Read inFAMOUS Second Son" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="07 Sep 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/infamous-second-son.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1724797800/" title="Read STAR WARS Jedi: Fallen Order" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="27 Aug 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/star-wars-jedi-fallen-order.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1723392000/" title="Read Elden Ring" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="11 Aug 2024"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/elden-ring.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1703873400/" title="Read Horizon Zero Dawn" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="29 Dec 2023"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/horizon-zero-dawn.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1702832040/" title="Read Astro’s Playroom" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="17 Dec 2023"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/astros-playroom.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1696541040/" title="Read Cocoon" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="05 Oct 2023"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/cocoon.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                    <li>
+                        <article class=" ">
+                            <a href="/game/1692462060/" title="Read Ratchet & Clank: Rift Apart" class="gallery-link">
+                                <div class="object mult-md">
+                                    <div class="gamepak">
+                                        <div class="group--front">
+                                            <div class="front face"></div>
+                                            <div class="group--label">
+                                                <div class="label-text" data-left="Platinum" data-right="19 Aug 2023"></div>
+                                                <img class="box-art" src="/assets/images/posts/games/ratchet-and-clank-rift-apart.jpg">
+                                            </div>
+                                            <div class="front-top-depth-1 face"></div>
+                                            <div class="front-top-depth-2 face"></div>
+                                            <div class="front-depth-1 face"></div>
+                                            <div class="front-depth-2 face"></div>
+                                            <div class="front-depth-3 face"></div>
+                                        </div>
+                                        <div class="back face"></div>
+                                        <div class="group--front-left">
+                                            <div class="front-left face"></div>
+                                            <div class="front-left-depth-1 face"></div>
+                                            <div class="front-left-slope face"></div>
+                                        </div>
+                                        <div class="group--front-right">
+                                            <div class="front-right face"></div>
+                                            <div class="front-right-depth-1 face"></div>
+                                            <div class="front-right-slope face"></div>
+                                        </div>
+                                        <div class="group--top">
+                                            <div class="top face"></div>
+                                            <div class="top-side face"></div>
+                                            <div class="top-top face"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </li>
+                    
+                
+                </ul>
+            </section>
+        </main>
+        
+        <footer id="site-footer">
+        
+            <aside id="author-card" class="container">
+            
+                <div id="author--bio" class="h-card vcard p-author">
+                    <a class="author--photo author--photo--link" rel="me" href="https://www.johnpe.art" title="Visit my website" tabindex="-1">
+                        <img class="u-photo hidden" alt="A Memoji avatar of John Peart" loading="lazy" src="/assets/images/me/memoji.png">
+                    </a>
+                    
+                    <p class="p-name author--name"><a rel="author" class="link-secondary no-underline p-author u-uid" href="http://localhost:8080"><strong><span class="p-given-name">John</span> <span class="p-family-name">Peart</span></strong></a></p>
+                    <p class="author--url link-secondary secondary-text"><a href="http://localhost:8080" rel="me" class="link-secondary no-underline u-url">www.johnpe.art</a></p>
+                </div>
+                
+                
+                <div class="author--icons">	
+                    <div class="author-icon mastodon"><a href="https://mastodon.social/@johnpeart" class="social-icon no-underline" title="Follow me on Mastodon" target="_blank" rel="me external">
+                    <svg class="social-icon" alt="Mastodon logo" role="img" viewBox="0 0 24 24" width="20" height="20"><title>Mastodon logo</title><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"></path></svg>
+                    <p class="secondary-text padding" style="--mult: 0;">Mastodon</p>
+                    </a>
+                    </div>
+                    <div class="author-icon bluesky"><a href="https://bsky.app/profile/johnpe.art" class="social-icon no-underline" title="Follow me on BlueSky" target="_blank" rel="me external">
+                    <svg class="social-icon" alt="Bluesky logo" role="img" viewBox="0 0 24 24" width="20" height="20"><title>BlueSky logo</title><path d="M 5.20232 2.8566598 C 7.953864 4.9223453 10.913462 9.110696 12.000077 11.358408 C 13.086775 9.110861 16.046207 4.922304 18.797834 2.8566598 C 20.783203 1.3661435 24.000013 .21286689 24.000013 3.8826543 C 24.000013 4.615561 23.57981 10.039449 23.333355 10.919996 C 22.476683 13.981387 19.355003 14.76221 16.578218 14.28962 C 21.431986 15.115712 22.666738 17.852028 20.000145 20.588345 C 14.935758 25.785145 12.721149 19.284448 12.153428 17.618733 C 12.049401 17.313368 12.000723 17.170515 12.000007 17.291987 C 11.999287 17.17051 11.950612 17.313367 11.846585 17.618733 C 11.279113 19.284448 9.064545 25.78531 3.9998684 20.588345 C 1.3332343 17.852028 2.567945 15.115546 7.421795 14.28962 C 4.644927 14.76221 1.5232057 13.981383 .6666585 10.919996 C .4201964 10.039366 -35527137e-22 4.615478 -35527137e-22 3.8826543 C -35527137e-22 .21286689 3.2168933 1.3661435 5.202179 2.8566598 Z"></path></svg>
+                    <p class="secondary-text padding" style="--mult: 0;">Bluesky</p>
+                    </a>
+                    </div>
+                    <div class="author-icon linkedin"><a href="https://linkedin.com/in/jrpeart" class="social-icon no-underline" title="Connect with me on LinkedIn" target="_blank" rel="me external">
+                    <svg class="social-icon" alt="LinkedIn logo" role="img" viewBox="0 0 24 24" width="20" height="20"><title>LinkedIn logo</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+                    <p class="secondary-text padding" style="--mult: 0;">LinkedIn</p>
+                    </a>
+                    </div>
+                    <div class="author-icon github"><a href="https://github.com/johnpeart" class="social-icon no-underline" title="Find me on Github" target="_blank" rel="me external">
+                    <svg class="social-icon" alt="Github logo" role="img" viewBox="0 0 24 24" width="20" height="20"><title>Github logo</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                    <p class="secondary-text padding" style="--mult: 0;">Github</p>
+                    </a>
+                    </div>
+                    <div class="author-icon buymeacoffee"><a href="https://buymeacoffee.com/johnpeart" class="social-icon no-underline" title="Buy me a coffee" target="_blank" rel="me external">
+                        <svg class="social-icon" alt="Buy Me A Coffee logo" role="img" viewBox="0 0 24 24" width="20" height="20"><title>Buy Me A Coffee logo</title><path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"></path></svg>
+                        <p class="secondary-text padding" style="--mult: 0;">Buy me a Coffee</p>
+                        </a>
+                    </div>
+                </div>
+                
+            </aside>
+                
+        </footer>
+                
+    </body>
+    
+</html>
