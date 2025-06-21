@@ -79,13 +79,35 @@
                 }
             }
             
+            @keyframes tilt {
+                0% {
+                    transform: rotate3d(0, 1, 0, calc(var(--angle) * -1));
+                }
+                100% {
+                    transform: rotate3d(0, 1, 0, var(--angle));
+                }
+            }
+            
+            @keyframes shine {
+                0% {
+                    filter: contrast(120%) brightness(130%) saturate(150%);
+                }
+                50% {
+                    filter: contrast(100%) brightness(100%) saturate(100%);
+                }
+                100% {
+                    filter: contrast(120%) brightness(130%) saturate(150%);
+                }
+            }
+            
             .object {
                 display: inline-block;
                 
                 --height:   65px;
                 --width:    57px;
                 --mult:     5;
-                --animation-duration: 2s;
+                --animation-duration: 5s;
+                --angle: 20deg;
                 
                 height: calc(var(--height) * var(--mult));
                 width: calc(var(--width) * var(--mult));
@@ -115,16 +137,6 @@
                     backface-visibility: visible;
                     z-index: 100;
                 }
-                    
-                &:hover .gamepak {
-                    transform: rotate3d(0, 1, 0, -40deg);
-                    transition: transform var(--animation-duration);
-                }
-                    
-                &:hover .gamepak .group--front .group--label {
-                    transition: filter var(--animation-duration);
-                    filter: contrast(120%) brightness(130%) saturate(150%);
-                }
                 
                 .gamepak { 
                     --height:   65px;
@@ -134,8 +146,8 @@
                     width: calc(var(--width) * var(--mult));
                     aspect-ratio: 65/57;
                     
-                    transform: rotate3d(0, 1, 0, 0deg);
-                    transition: transform var(--animation-duration);
+                    /* transform: rotate3d(0, 1, 0, 0deg); */
+                    animation: tilt var(--animation-duration) alternate infinite ease-in-out;
                     transform-origin: center;
                     perspective: initial;
                     perspective-origin: top;
@@ -177,8 +189,9 @@
                     top: calc(19px * var(--mult));
                     left: calc(7px * var(--mult));
                     
-                    filter: contrast(100%) brightness(100%) saturate(100%);
-                    transition: filter var(--animation-duration);
+                    /* filter: contrast(100%) brightness(100%) saturate(100%);
+                    transition: filter var(--animation-duration); */
+                    animation: shine var(--animation-duration) alternate infinite ease-in-out;
                 
                     .label-text {
                         --width: 43px;
